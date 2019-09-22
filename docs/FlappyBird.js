@@ -21,7 +21,7 @@ var score = 0;
 var highscore = 0;
 
 document.addEventListener("keydown",Jump);
-
+document.addEventListener("click",Jump);
 
 Loop();
 
