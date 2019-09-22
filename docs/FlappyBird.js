@@ -10,15 +10,19 @@ background.src = "sprites/background.png";
 
 var birdPos = 300; 
 var velocity = 0.0;
-var gravity = 0.2;
+var gravity = 20;
 
 var birdOffset = 40;
 var pipePos = 300;
 var pipeHeight = 800;
-var pipeVelocity = 3.0;
+var pipeVelocity = 300;
 var pipeOffset = 1200;
 var score = 0;
 var highscore = 0;
+
+var date = new Date();
+var lastTime = date.getTime();
+var deltaTime = (date.getTime() - lastTime) / 1000;
 
 document.addEventListener("keydown",Jump);
 document.addEventListener("click",Jump);
@@ -28,6 +32,10 @@ Loop();
 
 function Loop()
 {
+    date = new Date();
+    deltaTime = (date.getTime() - lastTime) / 1000;
+    lastTime = date.getTime();
+
 	Game();
 	Draw();
     requestAnimationFrame(Loop);
@@ -35,9 +43,10 @@ function Loop()
 
 
 function Game() {
-    velocity += gravity;
+
+    velocity += gravity * deltaTime;
     birdPos += velocity;
-    pipePos -= pipeVelocity;
+    pipePos -= pipeVelocity * deltaTime;
 
     if (pipePos < -200)
     {
@@ -81,7 +90,7 @@ function Draw() {
 
 
 function Jump() {
-	velocity = -10.0;
+	velocity = -10;
 }
 
 
